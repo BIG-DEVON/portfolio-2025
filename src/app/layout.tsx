@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Syne, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
-import Navbar from "@/components/Navbar"; // IMPORT ADDED
+import Navbar from "@/components/Navbar";
+import Preloader from "@/components/Preloader";
+import Cursor from "@/components/Cursor"; // IMPORT ADDED
+import GrainOverlay from "@/components/GrainOverlay"; // IMPORT ADDED
 
 const syne = Syne({
   subsets: ["latin"],
@@ -27,9 +30,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${syne.variable} ${spaceGrotesk.variable} antialiased bg-black text-white`}>
+      <body className={`${syne.variable} ${spaceGrotesk.variable} antialiased bg-black text-white cursor-none`}> 
+        {/* Note: I added 'cursor-none' to the body class above to hide the default mouse! */}
+        
+        <Preloader />
+        <Cursor />
+        <GrainOverlay />
+        
         <SmoothScroll>
-          <Navbar /> {/* NAVBAR ADDED HERE */}
+          <Navbar />
           {children}
         </SmoothScroll>
       </body>
